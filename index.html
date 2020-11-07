@@ -1,0 +1,87 @@
+<doctype html>
+  <html>
+    <head>
+      <title>Wheel of itsyourturntogiveapresentation</title>
+      <link rel="stylesheet" href="main.css" type="text/css" />
+      <script type="text/javascript" src="Winwheel.min.js"></script>
+      <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    </head>
+    <body>
+      <div align="center">
+        <div class="arrow-container">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            version="1.0"
+            viewBox="0 0 700 700"
+          >
+            <defs />
+            <path
+              fill="red"
+              d="M700 .713C700 2.57 350.008 700.7 349.428 699.999 347.482 697.645-.64.54 0 .28.419.111 79.298 33.971 175.287 75.524l174.526 75.55 174.242-75.537C619.888 33.992 698.68 0 699.15 0c.468 0 .851.32.851.713z"
+            />
+          </svg>
+        </div>
+        <canvas
+          id="canvas"
+          width="600"
+          height="600"
+          style="background-color: black"
+          data-responsiveMinWidth="240"
+          data-responsiveScaleHeight="true"
+          onClick="startSpin();"
+        >
+          <p>Sorry, your browser doesn't support canvas. Please try another.</p>
+        </canvas>
+
+        <p align="center">Tap the wheel to spin.</p>
+        <audio controls="controls" autoplay>
+          <source src="wheel-of-fortune.mp3" />
+        </audio>
+      </div>
+      <script>
+        // Create winwheel as per normal.
+        let theWheel = new Winwheel({
+          numSegments: 8, // Specify number of segments.
+          textFontSize: 28, // Set font size as desired.
+          responsive: true, // This wheel is responsive!
+          // Define segments including colour and text.
+          segments: [
+            { fillStyle: "#00B976", text: "Aidan" },
+            { fillStyle: "#E54E54", text: "Joel" },
+            { fillStyle: "#DD86AE", text: "John" },
+            { fillStyle: "#337EE1", text: "Jerome" },
+            { fillStyle: "#867BC4", text: "Isabela" },
+            { fillStyle: "#21ABC3", text: "Kevin" },
+            { fillStyle: "#E8C14A", text: "Matt" },
+            { fillStyle: "#A2C149", text: "Nick" },
+            { fillStyle: "#E09853", text: "Nick does every TED talk" },
+          ],
+          pins: {
+            outerRadius: 3,
+            responsive: true, // This must be set to true if pin size is to be responsive, if not just location is.
+          },
+          // Specify the animation to use.
+          animation: {
+            type: "spinToStop",
+            duration: 15, // Duration in seconds.
+            spins: 10, // Number of complete spins.
+          },
+        });
+
+        // -----------------------------------------------------------------
+        // Called by the onClick of the canvas, starts the spinning.
+        function startSpin() {
+          // Stop any current animation.
+          theWheel.stopAnimation(false);
+
+          // Reset the rotation angle to less than or equal to 360 so spinning again
+          // works as expected. Setting to modulus (%) 360 keeps the current position.
+          theWheel.rotationAngle = theWheel.rotationAngle % 360;
+
+          // Start animation.
+          theWheel.startAnimation();
+        }
+      </script>
+    </body>
+  </html>
+</doctype>

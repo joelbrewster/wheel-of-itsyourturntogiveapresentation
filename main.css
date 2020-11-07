@@ -1,0 +1,16 @@
+body
+{
+  font-family: "Times New Roman", Times, serif;
+  background-color: black;
+  font-size: 2em;
+  margin: 1em;
+}
+
+p {
+    color: white;
+    font-size: 0.8em;
+}
+
+.arrow-container {
+    width: 40px;
+}
